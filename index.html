@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Residence Rejiche – منازل مفروشة للكراء في رجيش، المهدية</title>
+<meta name="description" content="منازل سياحية مفروشة للكراء قرب البحر في رجيش، المهدية، تونس. احجز مباشرة بأسعار واضحة. Locations meublées à Rejiche, Mahdia.">
+<meta property="og:title" content="Residence Rejiche">
+<meta property="og:image" content="exterior.jpg">
+<style>
+:root{--ink:#0b2a36;--foam:#f7faf9;--sea:#1f7f8e;--sun:#c98414;--line:#d5e2e3}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;font:16px/1.7 system-ui,'Segoe UI',Tahoma,sans-serif;background:var(--foam);color:var(--ink)}
+header{position:sticky;top:0;z-index:5;display:flex;gap:.6rem;align-items:center;justify-content:space-between;padding:.6rem 1rem;background:var(--ink);color:#fff}
+header b{font-size:1.1rem}header nav{display:flex;gap:.4rem;align-items:center}
+header button,.wa{background:none;border:1px solid #ffffff66;color:#fff;border-radius:6px;padding:.25rem .6rem;cursor:pointer;text-decoration:none;font-size:.9rem}
+.wa{background:#1faa59;border-color:#1faa59}
+.hero{min-height:70vh;display:flex;align-items:flex-end;padding:2rem 1rem;color:#fff;background:linear-gradient(#0b2a3600,#0b2a36d9),url(exterior.jpg) center/cover var(--ink)}
+.hero h1{font-size:clamp(2rem,6vw,3.6rem);margin:0 0 .5rem;line-height:1.2;max-width:16em}
+.hero p{margin:0 0 1rem;max-width:34em}
+.btn,button.p{display:inline-block;background:var(--sun);color:#fff;border:0;border-radius:6px;padding:.7rem 1.4rem;font-size:1rem;cursor:pointer;text-decoration:none}
+button:disabled{opacity:.45;cursor:not-allowed}
+section{max-width:1000px;margin:0 auto;padding:2.2rem 1rem}
+h2{font-size:1.6rem;margin:0 0 1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
+.house{background:#fff;border:1px solid var(--line);overflow:hidden;border-radius:4px}
+.house img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--line)}
+.house div{padding:.8rem 1rem}.house h3{margin:0}
+.price{color:var(--sun);font-weight:700}
+form,.card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1rem;margin-bottom:.8rem}
+label{display:block;margin:.5rem 0 .15rem;font-size:.9rem}
+input,select,textarea{width:100%;padding:.55rem;font:inherit;border:1px solid #9bb;border-radius:4px;background:#fff}
+input[type=checkbox]{width:auto}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--sea);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+#q{font-weight:700;color:var(--sea);min-height:1.6em;margin:.6rem 0}
+#un{font-size:.85rem;color:#a33}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
+.tabs button,.sm{border:1px solid var(--sea);background:#fff;color:var(--sea);border-radius:4px;padding:.3rem .7rem;cursor:pointer;margin:.2rem 0 0 .2rem;text-decoration:none;display:inline-block;font-size:.9rem}
+footer{text-align:center;padding:1.5rem;color:#567}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:no-preference){.house{transition:transform .2s}.house:hover{transform:translateY(-3px)}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.107.0/dist/umd/supabase.js"></script>
+</head>
+<body>
+<div id="pub"></div>
+<div id="adm" hidden style="max-width:900px;margin:0 auto;padding:1rem"></div>
+<script>
+/* ===== الإعدادات (المفتاح anon عام بطبيعته، لا تضع هنا service_role أبداً) ===== */
+const SB_URL='https://pyyafqxovnhxtfcqmscm.supabase.co',SB_KEY='sb_publishable_ElSVmplVK9obCoNjMvywnQ_0or_xEux',WA='21692529464',MAP='https://maps.app.goo.gl/j8E9SvG214EiwJ1h9';
+const $=s=>document.querySelector(s);
+let sb=null;
+function warn(m){let e=$('#err');if(!e){e=document.createElement('div');e.id='err';e.style.cssText='position:fixed;bottom:0;left:0;right:0;z-index:99;background:#b3261e;color:#fff;padding:.7rem 1rem;font:14px/1.5 system-ui;direction:ltr;text-align:left';document.body.appendChild(e)}e.textContent=m}
+addEventListener('error',e=>warn('JS error: '+e.message));
+addEventListener('unhandledrejection',e=>warn('Error: '+(e.reason&&e.reason.message||e.reason)));
+try{
+ if(!/^https?:\/\//.test(SB_URL)||SB_KEY.startsWith('PASTE'))throw Error('SB_URL / SB_KEY are not set at the top of the script in index.html');
+ if(!window.supabase)throw Error('Supabase library did not load (check the internet connection or ad-blocker)');
+ sb=supabase.createClient(SB_URL,SB_KEY);
+}catch(e){warn(e.message)}
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const wal=(n,m)=>{n=String(n).replace(/\D/g,'');if(n.length==8)n='216'+n;return 'https://wa.me/'+n+'?text='+encodeURIComponent(m)};
+const T={
+ar:{tag:'منازل مفروشة للكراء قرب البحر في رجيش، المهدية',sub:'احجز مباشرة مع صاحب الإقامة بسعر واضح.',book:'احجز الآن',houses:'منازلنا',gu:'أشخاص',from:'ابتداءً من',cur:'د.ت',pn:'د.ت / الليلة',bt:'طلب حجز',hs:'المنزل',ci:'تاريخ الوصول',co:'تاريخ المغادرة',gs:'عدد الأشخاص',nm:'الاسم الكامل',ph:'الهاتف',em:'البريد (اختياري)',no:'ملاحظات',ns:'ليالٍ',tt:'الإجمالي',sd:'إرسال طلب الحجز',ok:'وصلنا طلبك. سنؤكد الحجز قريباً.',wa:'واتساب',of:'الأسعار والعروض',ds:'خصم',mn:'ليالٍ فأكثر',ct:'اتصل بنا',ms:'رسالتك',sm:'إرسال الرسالة',sent:'وصلتنا رسالتك.',ab:'من نحن',abt:'عمارة بن عبدالله: منازل مفروشة للإيجار السياحي على بعد خطوات من البحر في رجيش، المهدية.',mp:'الموقع على الخريطة',un:'غير متاح:',ch:'اختر منزلاً',e:{dates_unavailable:'هذه التواريخ محجوزة.',invalid_dates:'تواريخ غير صحيحة.',invalid_guests:'عدد الأشخاص يتجاوز سعة المنزل.',invalid_contact:'تحقق من الاسم والهاتف.',x:'حدث خطأ. حاول مرة أخرى.'}},
+fr:{tag:'Maisons meublées à louer près de la mer à Rejiche, Mahdia',sub:'Réservez directement auprès du propriétaire, prix clair.',book:'Réserver',houses:'Nos maisons',gu:'pers.',from:'dès',cur:'TND',pn:'TND / nuit',bt:'Demande de réservation',hs:'Maison',ci:'Arrivée',co:'Départ',gs:'Nombre de personnes',nm:'Nom complet',ph:'Téléphone',em:'E-mail (facultatif)',no:'Remarques',ns:'nuits',tt:'Total',sd:'Envoyer la demande',ok:'Demande reçue. Nous confirmons très vite.',wa:'WhatsApp',of:'Tarifs et offres',ds:'Remise',mn:'nuits et plus',ct:'Contact',ms:'Votre message',sm:'Envoyer',sent:'Message reçu.',ab:'À propos',abt:'Résidence Ben Abdallah : maisons meublées de vacances à deux pas de la mer, à Rejiche, Mahdia.',mp:'Voir sur la carte',un:'Indisponible :',ch:'Choisir une maison',e:{dates_unavailable:'Ces dates sont déjà réservées.',invalid_dates:'Dates invalides.',invalid_guests:'Capacité dépassée.',invalid_contact:'Vérifiez nom et téléphone.',x:'Erreur. Réessayez.'}},
+en:{tag:'Furnished holiday homes by the sea in Rejiche, Mahdia',sub:'Book directly with the owner at a clear price.',book:'Book now',houses:'Our houses',gu:'guests',from:'from',cur:'TND',pn:'TND / night',bt:'Booking request',hs:'House',ci:'Check-in',co:'Check-out',gs:'Guests',nm:'Full name',ph:'Phone',em:'Email (optional)',no:'Notes',ns:'nights',tt:'Total',sd:'Send request',ok:'Request received. We will confirm soon.',wa:'WhatsApp',of:'Rates and offers',ds:'Discount',mn:'nights or more',ct:'Contact',ms:'Your message',sm:'Send message',sent:'Message received.',ab:'About',abt:'Ben Abdallah Residence: furnished holiday rentals steps from the sea in Rejiche, Mahdia.',mp:'View on map',un:'Unavailable:',ch:'Choose a house',e:{dates_unavailable:'These dates are already booked.',invalid_dates:'Invalid dates.',invalid_guests:'Over the house capacity.',invalid_contact:'Check name and phone.',x:'Error. Please try again.'}}};
+let L=localStorage.getItem('l')||'ar',H=[],S=[],D=[],U=[],UH='';
+const t=k=>T[L][k],nm=(o,p='name_')=>o[p+L]||o[p+'ar']||'';
+
+async function load(){
+ if(!sb){render();return}
+ const[a,b,c]=await Promise.all([sb.from('houses').select('*').order('sort_order'),sb.from('seasons').select('*').order('start_date'),sb.from('discounts').select('*').eq('active',true)]);
+ const er=a.error||b.error||c.error;if(er)warn('Database: '+er.message);
+ H=a.data||[];S=b.data||[];D=c.data||[];render();
+}
+function render(){
+ const d=document.documentElement;d.lang=L;d.dir=L=='ar'?'rtl':'ltr';
+ const today=new Date().toISOString().slice(0,10),hn=id=>id?nm(H.find(h=>h.id==id)||{name_ar:''}):'';
+ $('#pub').innerHTML=`
+<header><b>Residence Rejiche</b><nav>
+${['ar','fr','en'].map(l=>`<button data-l="${l}">${l.toUpperCase()}</button>`).join('')}
+<a class="wa" href="${wal(WA,'Residence Rejiche')}">${t('wa')}</a></nav></header>
+<div class="hero"><div><h1>${t('tag')}</h1><p>${t('sub')}</p><a class="btn" href="#book">${t('book')}</a></div></div>
+<section id="houses"><h2>${t('houses')}</h2><div class="grid">${H.map(h=>`
+<div class="house"><img loading="lazy" src="${esc((h.photos||[])[0]||'exterior.jpg')}" alt="${esc(nm(h))}"><div>
+<h3>${esc(nm(h))}</h3><p>${esc(nm(h,'desc_'))}</p>
+<p>${h.max_guests} ${t('gu')} · ${t('from')} <span class="price">${h.base_price} ${t('pn')}</span></p></div></div>`).join('')}</div></section>
+<section id="book"><h2>${t('bt')}</h2><form id="bf">
+<label>${t('hs')}</label><select name="h" required><option value="">${t('ch')}</option>${H.map(h=>`<option value="${h.id}">${esc(nm(h))}</option>`).join('')}</select>
+<div class="row"><div><label>${t('ci')}</label><input type="date" name="i" min="${today}" required></div><div><label>${t('co')}</label><input type="date" name="o" min="${today}" required></div></div>
+<label>${t('gs')}</label><input type="number" name="g" min="1" value="2" required>
+<div id="un"></div><div id="q"></div>
+<div class="row"><div><label>${t('nm')}</label><input name="n" required></div><div><label>${t('ph')}</label><input type="tel" name="p" required></div></div>
+<label>${t('em')}</label><input type="email" name="e"><label>${t('no')}</label><textarea name="m" rows="2"></textarea>
+<p><button class="p" id="bs" disabled>${t('sd')}</button></p><p id="bm"></p></form></section>
+<section><h2>${t('of')}</h2>${S.map(s=>`<div class="card"><b>${esc(nm(s))}</b> ${esc(hn(s.house_id))} — ${s.start_date} → ${s.end_date}: <span class="price">${s.price_per_night} ${t('pn')}</span></div>`).join('')}
+${D.map(x=>`<div class="card">${esc(nm(x,'title_'))} ${t('ds')} <span class="price">${x.percent}%</span> — ${x.min_nights} ${t('mn')} ${esc(hn(x.house_id))}</div>`).join('')}</section>
+<section><h2>${t('ab')}</h2><p>${t('abt')}</p><a class="btn" href="${MAP}">${t('mp')}</a></section>
+<section id="contact"><h2>${t('ct')}</h2><form id="cf2"><label>${t('nm')}</label><input name="n" required>
+<label>${t('ph')}</label><input name="p" type="tel"><label>${t('ms')}</label><textarea name="b" rows="3" required maxlength="2000"></textarea>
+<p><button class="p">${t('sm')}</button> <a class="wa" style="color:#fff" href="${wal(WA,'')}">${t('wa')}</a></p><p id="cm"></p></form></section>
+<footer>© ${new Date().getFullYear()} Residence Rejiche</footer>`;
+ document.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{L=b.dataset.l;localStorage.setItem('l',L);render()});
+ const f=$('#bf');['h','i','o'].forEach(n=>f.elements[n].onchange=upd);
+ f.onsubmit=send;$('#cf2').onsubmit=contact;UH='';
+}
+async function upd(){
+ const f=$('#bf').elements,h=f.h.value,i=f.i.value,o=f.o.value,q=$('#q'),btn=$('#bs');
+ q.textContent='';btn.disabled=true;if(!sb)return;if(!h){$('#un').textContent='';return}
+ if(UH!==h){const{data}=await sb.rpc('unavailable_ranges',{p_house:h});U=data||[];UH=h;
+  $('#un').textContent=U.length?t('un')+' '+U.map(r=>r.check_in+' → '+r.check_out).join(' | '):''}
+ if(!i||!o||o<=i)return;
+ if(U.some(r=>i<r.check_out&&o>r.check_in)){q.textContent=t('e').dates_unavailable;return}
+ const n=Math.round((new Date(o)-new Date(i))/864e5),{data,error}=await sb.rpc('quote_price',{p_house:h,p_in:i,p_out:o});
+ if(error)return;q.textContent=`${n} ${t('ns')} — ${t('tt')}: ${data} ${t('cur')}`;btn.disabled=false;
+}
+async function send(e){
+ e.preventDefault();const f=e.target,v=n=>f.elements[n].value,m=$('#bm');
+ const{error}=await sb.rpc('create_booking',{p_house:v('h'),p_in:v('i'),p_out:v('o'),p_guests:+v('g'),p_name:v('n'),p_phone:v('p'),p_email:v('e'),p_notes:v('m')});
+ if(error){const k=Object.keys(t('e')).find(k=>error.message.includes(k));m.textContent=t('e')[k||'x'];return}
+ const txt=`${v('n')} | ${v('i')} → ${v('o')} | ${v('g')}`;
+ m.innerHTML=esc(t('ok'))+` <a class="sm" href="${wal(WA,txt)}">${t('wa')}</a>`;f.reset();UH='';$('#q').textContent='';$('#bs').disabled=true;
+}
+async function contact(e){
+ e.preventDefault();const f=e.target.elements;
+ const{error}=await sb.from('messages').insert({name:f.n.value,phone:f.p.value||null,body:f.b.value});
+ $('#cm').textContent=error?t('e').x:t('sent');if(!error)e.target.reset();
+}
+
+/* ===== لوحة الإدارة: ضع #admin بعد رابط الموقع ===== */
+const ST={pending:'بانتظار القرار',confirmed:'مؤكد',rejected:'مرفوض',cancelled:'ملغى'};
+async function adm(){
+ const A=$('#adm');if(!sb){A.innerHTML='<p class="card">الموقع غير مربوط بقاعدة البيانات بعد. ضع SB_URL و SB_KEY في أول الكود.</p>';return}
+ const{data:{session}}=await sb.auth.getSession();
+ if(!session){A.innerHTML=`<form id="lf"><h2>دخول الإدارة</h2><label>البريد</label><input name="e" type="email" required><label>كلمة المرور</label><input name="p" type="password" required><p><button class="p">دخول</button></p><p id="lm"></p></form>`;
+  $('#lf').onsubmit=async e=>{e.preventDefault();const f=e.target.elements,{error}=await sb.auth.signInWithPassword({email:f.e.value,password:f.p.value});if(error)$('#lm').textContent='بيانات الدخول خاطئة.';else adm()};return}
+ const{data:ok}=await sb.rpc('is_admin');
+ if(!ok){A.innerHTML='<p class="card">هذا الحساب ليس حساب إدارة.</p><button class="sm" id="lo">خروج</button>';$('#lo').onclick=out;return}
+ A.innerHTML=`<h2>لوحة الإدارة</h2><div class="tabs"><button data-t="bk">الحجوزات</button><button data-t="hs">المنازل</button><button data-t="se">المواسم</button><button data-t="di">التخفيضات</button><button data-t="ms">الرسائل</button><button id="lo">خروج</button></div><div id="tb"></div>`;
+ $('#lo').onclick=out;
+ const TB={bk:tbk,ms:tms,
+  hs:()=>crud('houses',[['name_ar','الاسم (عربي)'],['name_fr','Nom (FR)'],['name_en','Name (EN)'],['desc_ar','الوصف (عربي)','t'],['desc_fr','Description (FR)','t'],['desc_en','Description (EN)','t'],['bedrooms','الغرف','n'],['beds','الأسرّة','n'],['bathrooms','الحمامات','n'],['max_guests','أقصى عدد أشخاص','n'],['base_price','السعر الأساسي لليلة (د.ت)','n'],['photos','روابط الصور (افصل بفاصلة) أو ارفع صوراً','p'],['video_url','رابط فيديو'],['sort_order','الترتيب','n'],['is_active','ظاهر للزوار','b']],'sort_order',r=>r.name_ar),
+  se:()=>crud('seasons',[['house_id','المنزل','h'],['name_ar','اسم الموسم'],['start_date','من','d'],['end_date','إلى','d'],['price_per_night','سعر الليلة','n']],'start_date',r=>`${r.name_ar} ${r.start_date}→${r.end_date}: ${r.price_per_night}`),
+  di:()=>crud('discounts',[['house_id','المنزل','h'],['title_ar','العنوان'],['min_nights','أقل عدد ليالٍ','n'],['percent','نسبة الخصم %','n'],['active','مفعّل','b']],'min_nights',r=>`${r.title_ar||''} ${r.percent}% من ${r.min_nights} ليالٍ`)};
+ A.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>TB[b.dataset.t]());tbk();
+}
+const out=async()=>{await sb.auth.signOut();adm()};
+async function tbk(){
+ const{data}=await sb.from('bookings').select('*,houses(name_ar),customers(full_name,phone,email)').order('created_at',{ascending:false});
+ const c=(data||[]).filter(b=>b.status=='confirmed');
+ $('#tb').innerHTML=`<div class="card">إيرادات الحجوزات المؤكدة: <b>${c.reduce((s,b)=>s+ +b.total_price,0)}</b> د.ت · الليالي: <b>${c.reduce((s,b)=>s+b.nights,0)}</b> · عدد الحجوزات: <b>${c.length}</b></div>`+
+ (data||[]).map(b=>{const w=wal(b.customers.phone,b.status=='confirmed'?`مرحباً ${b.customers.full_name}، تم تأكيد حجزك في ${b.houses.name_ar} من ${b.check_in} إلى ${b.check_out}. المجموع ${b.total_price} د.ت. Residence Rejiche`:`مرحباً ${b.customers.full_name}، نعتذر، لم نتمكن من تأكيد حجزك للتواريخ ${b.check_in} → ${b.check_out}.`);
+ return`<div class="card" data-id="${b.id}"><b>${esc(b.houses.name_ar)}</b> ${b.check_in} → ${b.check_out} (${b.nights} ليالٍ) · ${b.guests} أشخاص · ${b.total_price} د.ت<br>${esc(b.customers.full_name)} · ${esc(b.customers.phone)} ${esc(b.customers.email||'')}<br><i>${ST[b.status]}</i> ${esc(b.notes||'')}<br>
+ ${b.status!='confirmed'?'<button class="sm" data-s="confirmed">قبول</button>':''}${b.status=='pending'?'<button class="sm" data-s="rejected">رفض</button>':''}${b.status=='confirmed'?'<button class="sm" data-s="cancelled">إلغاء</button>':''}<button class="sm" data-d="1">تعديل التواريخ</button>${['confirmed','rejected'].includes(b.status)?`<a class="sm" href="${w}">إرسال رسالة واتساب للعميل</a>`:''}</div>`}).join('');
+ $('#tb').onclick=async e=>{const el=e.target,id=el.closest('[data-id]')?.dataset.id;if(!id)return;
+  if(el.dataset.s){const{error}=await sb.from('bookings').update({status:el.dataset.s}).eq('id',id);if(error)alert('تعذّر: التواريخ محجوزة لحجز آخر.');tbk()}
+  if(el.dataset.d){const b=data.find(x=>x.id==id),i=prompt('تاريخ الوصول (YYYY-MM-DD)',b.check_in),o=prompt('تاريخ المغادرة (YYYY-MM-DD)',b.check_out);if(!i||!o)return;
+   const{data:p,error:e1}=await sb.rpc('quote_price',{p_house:b.house_id,p_in:i,p_out:o});if(e1)return alert('تواريخ غير صحيحة');
+   const{error}=await sb.from('bookings').update({check_in:i,check_out:o,total_price:p}).eq('id',id);if(error)alert('التواريخ تتداخل مع حجز آخر.');tbk()}};
+}
+async function tms(){
+ const{data}=await sb.from('messages').select('*').order('created_at',{ascending:false});
+ $('#tb').innerHTML=(data||[]).map(m=>`<div class="card" data-id="${m.id}" style="${m.is_read?'opacity:.6':''}"><b>${esc(m.name)}</b> ${esc(m.phone||'')} ${esc(m.email||'')}<p>${esc(m.body)}</p>${m.phone?`<a class="sm" href="${wal(m.phone,'')}">رد عبر واتساب</a>`:''}<button class="sm" data-r="1">تمت القراءة</button><button class="sm" data-x="1">حذف</button></div>`).join('')||'<p>لا رسائل.</p>';
+ $('#tb').onclick=async e=>{const id=e.target.closest('[data-id]')?.dataset.id;if(!id)return;
+  if(e.target.dataset.r)await sb.from('messages').update({is_read:true}).eq('id',id);
+  if(e.target.dataset.x&&confirm('حذف الرسالة؟'))await sb.from('messages').delete().eq('id',id);tms()};
+}
+async function crud(table,F,ord,lab){
+ const[{data:R},{data:HH}]=await Promise.all([sb.from(table).select('*').order(ord),sb.from('houses').select('id,name_ar')]);
+ const fld=([k,l,ty],r={})=>{const v=r[k]??'';
+  if(ty=='b')return`<label><input type="checkbox" name="${k}" ${(r[k]??true)?'checked':''}> ${l}</label>`;
+  if(ty=='h')return`<label>${l}</label><select name="${k}"><option value="">كل المنازل</option>${HH.map(h=>`<option value="${h.id}" ${h.id==v?'selected':''}>${esc(h.name_ar)}</option>`).join('')}</select>`;
+  if(ty=='t')return`<label>${l}</label><textarea name="${k}" rows="2">${esc(v)}</textarea>`;
+  const val=ty=='p'?(v||[]).join(','):v;
+  return`<label>${l}</label><input name="${k}" type="${ty=='n'?'number':ty=='d'?'date':'text'}" step="any" value="${esc(val)}">`+(ty=='p'?'<input type="file" accept="image/*" multiple data-up="1">':'')};
+ const draw=r=>{
+  $('#tb').innerHTML=`<form id="cf" class="card"><input type="hidden" name="id" value="${r?.id||''}">${F.map(f=>fld(f,r)).join('')}<p><button class="p">${r?'حفظ التعديل':'إضافة'}</button></p></form>`+
+  (R||[]).map((x,n)=>`<div class="card">${esc(lab(x))}<br><button class="sm" data-e="${n}">تعديل</button><button class="sm" data-x="${x.id}">حذف</button></div>`).join('');
+  const cf=$('#cf');
+  cf.onchange=async e=>{if(!e.target.dataset.up)return;const p=cf.elements.photos,urls=p.value?p.value.split(','):[];
+   for(const file of e.target.files){const path=Date.now()+'-'+file.name.replace(/[^\w.]/g,'_'),{error}=await sb.storage.from('house-photos').upload(path,file);
+    if(error)return alert('فشل رفع الصورة');urls.push(sb.storage.from('house-photos').getPublicUrl(path).data.publicUrl)}
+   p.value=urls.join(',')};
+  cf.onsubmit=async e=>{e.preventDefault();const o={},el=cf.elements;
+   F.forEach(([k,,ty])=>{const x=el[k];o[k]=ty=='b'?x.checked:ty=='n'?(x.value===''?null:+x.value):ty=='p'?x.value.split(',').map(s=>s.trim()).filter(Boolean):(x.value||null)});
+   if(el.id.value)o.id=el.id.value;else if(table=='houses')o.slug='h'+Date.now();
+   const{error}=await sb.from(table).upsert(o);if(error)return alert('تعذّر الحفظ: '+error.message);
+   tbl()};
+  $('#tb').querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{draw(R[b.dataset.e]);scrollTo(0,0)});
+  $('#tb').querySelectorAll('[data-x]').forEach(b=>b.onclick=async()=>{if(confirm('تأكيد الحذف؟')){const{error}=await sb.from(table).delete().eq('id',b.dataset.x);if(error)alert('لا يمكن حذف منزل له حجوزات. أخفِه بدلاً من ذلك.');tbl()}});
+ };
+ const tbl=()=>crud(table,F,ord,lab);draw();
+}
+function route(){const a=location.hash==='#admin';$('#pub').hidden=a;$('#adm').hidden=!a;if(a)adm()}
+addEventListener('hashchange',route);load();route();
+</script>
+</body>
+</html>
